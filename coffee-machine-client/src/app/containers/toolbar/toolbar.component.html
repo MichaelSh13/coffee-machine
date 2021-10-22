@@ -1,0 +1,24 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button
+    aria-label="Example icon-button with menu icon"
+    (click)="sidenav.toggle()"
+    style="margin-right: 1em;"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span>Coffee Machine (app)</span>
+
+  <span class="spacer"></span>
+
+  <button mat-icon-button
+    aria-label="Example icon-button with menu icon"
+    (click)="setSideBarToggleSupscription()"
+  >
+    <mat-icon *ngIf="getToggle(); else arrowBackIos">arrow_forward_ios</mat-icon>
+
+    <ng-template #arrowBackIos>
+      <mat-icon>arrow_back_ios</mat-icon>
+    </ng-template>
+  </button>
+</mat-toolbar>

@@ -1,0 +1,39 @@
+<mat-grid-list [cols]="1" rowHeight="100%">
+  <mat-grid-tile>
+    <form (ngSubmit)="onSubmit()" novalidate class="form">
+      <button class="ripple mat-elevation-z4"
+        matRipple
+        [matRippleCentered]="true"
+        [matRippleDisabled]="false"
+        [matRippleUnbounded]="false"
+        matRippleColor="rgba(255,255,255,.4)"
+        [disabled]="disabledTime"
+        [style.cursor]="disabledTime ? 'auto' : 'pointer'"
+      >
+        <span class="mat-h1">{{ authenticated ? (
+          disabledTime ? 'Creating a coffee...' : 'Order Coffee'
+        ) : 'Sign In' }}</span>
+      </button>
+
+      <br />
+      <br />
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Choose Type of Coffee</mat-label>
+        <mat-select [disabled]="disabled || disabledTime" name="type" [(ngModel)]="coffee.type">
+          <mat-option *ngFor="let type of coffeeTypes" [value]="type.key">
+            {{type.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <br/>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Choose Time</mat-label>
+        <input matInput [disabled]="disabled || disabledTime" name="time" type="time" [(ngModel)]="coffee.time">
+      </mat-form-field>
+      <br/>
+    </form>
+  </mat-grid-tile>
+</mat-grid-list>

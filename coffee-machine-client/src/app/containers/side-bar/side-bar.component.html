@@ -1,0 +1,9 @@
+<app-profile *ngIf="authenticated; else login" [profile]="profile!"></app-profile>
+
+<ng-template #login>
+  <mat-grid-list cols="1" rowHeight="100%">
+    <mat-grid-tile colspan="1">
+      <app-login style="width: 100%;"></app-login>
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-template>

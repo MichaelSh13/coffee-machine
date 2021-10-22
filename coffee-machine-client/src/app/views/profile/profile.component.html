@@ -1,0 +1,11 @@
+<mat-card *ngIf="profile" class="example-card">
+  <mat-card-title>{{ profile.name }}</mat-card-title>
+  <mat-card-subtitle>{{ profile.role }}</mat-card-subtitle>
+  <mat-card-content>
+    <p>{{ profile.email }}</p>
+    <p>{{ profile.id }}</p>
+  </mat-card-content>
+  <mat-card-actions [align]="'end'">
+    <button mat-button (click)="logout()">LOG OUT</button>
+  </mat-card-actions>
+</mat-card>

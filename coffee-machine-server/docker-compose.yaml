@@ -1,0 +1,52 @@
+version: '3.7'
+
+services:
+  main:
+    container_name: main
+    build:
+      context: ./
+      target: ${NODE_ENV}
+    env_file:
+      - envs/${NODE_ENV}.env
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+      - 9229:9229
+    command: npm run start:dev
+    networks:
+      - webnet
+    depends_on:
+      - redis
+      - postgres
+  redis:
+    container_name: ${REDIS_HOST}
+    image: redis:5
+    expose:
+      - ${REDIS_PORT}
+    networks:
+      - webnet
+    volumes:
+      - redis-data:/data
+      - redis-conf:/usr/local/etc/redis/redis.conf
+  postgres:
+    container_name: ${DB_HOST}
+    image: postgres:12
+    networks:
+      - webnet
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_DATABASE_NAME}
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+networks:
+  webnet:
+volumes:
+  pgdata:
+  redis-data:
+  redis-conf:

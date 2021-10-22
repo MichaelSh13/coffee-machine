@@ -1,0 +1,20 @@
+// mat-sidenav[position="start"] {
+mat-sidenav {
+    min-width: 300px;
+    width: 15vw;
+    padding: 1em;
+}
+.mat-drawer { 
+    background-color: #dddddd;
+    color:#fff;
+}
+.main-content {
+    padding: 1em;
+}
+mat-sidenav-content {
+    display: flex;
+    flex-direction: column;
+    .main-content {
+        flex: 1;
+    }
+}

@@ -1,0 +1,78 @@
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Login
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <form [formGroup]="userFormLogin" novalidate>
+      <table class="full-width" cellspacing="0">
+        <tr><td><mat-form-field class="full-width">
+          <input matInput placeholder="Email" formControlName="email" required type="email">
+          <mat-error *ngIf="this.userFormLogin.controls.email.hasError('required')">
+            Field is required;
+          </mat-error>
+        </mat-form-field></td></tr>
+        <tr><td><mat-form-field class="full-width">
+          <input matInput placeholder="Password" type="password" formControlName="password" required>
+          <mat-error *ngIf="this.userFormLogin.controls.password.hasError('required')">
+            Field is required;
+          </mat-error>
+        </mat-form-field></td></tr>
+      </table>
+    </form>
+
+    <mat-progress-bar mode="indeterminate" [style.display]="loading ? 'block' : 'none'"></mat-progress-bar>
+    
+    <mat-action-row>
+      <button mat-raised-button color="primary" (click)="Login()">Login</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(0)">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Registration
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <form [formGroup]="userFormRegistr" novalidate>
+      <table class="full-width" cellspacing="0">
+        <tr><td><mat-form-field class="full-width">
+          <input matInput placeholder="Email" formControlName="email" required type="email">
+          <mat-error *ngIf="this.userFormRegistr.controls.email.hasError('required')">
+            Field is required;
+          </mat-error>
+        </mat-form-field></td></tr>
+        <tr><td><mat-form-field class="full-width">
+          <input matInput placeholder="Password" type="password" formControlName="password" required>
+          <mat-error *ngIf="this.userFormRegistr.controls.password.hasError('required')">
+            Field is required;
+          </mat-error>
+        </mat-form-field></td></tr>
+        <tr><td><mat-form-field class="full-width">
+          <input matInput placeholder="Name" type="text" formControlName="name" required>
+          <mat-error *ngIf="this.userFormRegistr.controls.password.hasError('required')">
+            Field is required;
+          </mat-error>
+        </mat-form-field></td></tr>
+        <tr><td><mat-form-field class="full-width">
+          <mat-label>Roles</mat-label>
+          <mat-select name="role" formControlName="role" required>
+            <mat-option *ngFor="let role of userRoles" [value]="role.key">
+              {{role.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field></td></tr>
+      </table>
+    </form>
+
+    <mat-progress-bar mode="indeterminate" [style.display]="loading ? 'block' : 'none'"></mat-progress-bar>
+    
+    <mat-action-row>
+      <button mat-raised-button color="warn" (click)="Registration()">Sign Up</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+</mat-accordion>

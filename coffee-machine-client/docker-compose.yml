@@ -1,0 +1,14 @@
+version: "3"
+services:
+  client:
+    container_name: client
+    build: .
+    ports:
+      - "4200:4200"
+    environment:
+      SHELL: /bin/bash
+      NODE_ENV: development
+    volumes:
+      - .:/usr/src/app/client
+      - /usr/src/app/client/node_modules
+    entrypoint: ng serve --host 0.0.0.0 --poll 1

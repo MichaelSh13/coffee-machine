@@ -15,7 +15,6 @@ import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
-    ConfigurationModule,
     DatabaseModule,
     BullQueueModule,
     CoffeeModule,
@@ -24,6 +23,7 @@ import { AuthModule } from './modules/auth/auth.module';
     AuthModule,
     CoffeeStatusModule,
     CoffeeMachineModule,
+    ConfigurationModule,
   ],
   controllers: [AppController],
   providers: [

@@ -1,16 +1,29 @@
 version: '3.7'
 
 services:
-  main:
-    container_name: main
-    build:
-      context: ./
-      target: development
-    env_file:
-      - envs/development.env
+  client:
+    container_name: client
+    build: ./coffee-machine-client
+    ports:
+      - "4200:4200"
+    environment:
+      SHELL: /bin/bash
+      NODE_ENV: development
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./coffee-machine-client:/usr/src/app/client
+      - /usr/src/app/client/node_modules
+    entrypoint: ng serve --host 0.0.0.0 --poll 1
+
+  server:
+    container_name: server
+    build:
+      context: ./coffee-machine-server
+      target: ${NODE_ENV}
+    env_file:
+      - ./envs/${NODE_ENV}.env
+    volumes:
+      - ./coffee-machine-server:/usr/src/app/server
+      - /usr/src/app/server/node_modules
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
       - 9229:9229
@@ -20,6 +33,7 @@ services:
     depends_on:
       - redis
       - postgres
+
   redis:
     container_name: ${REDIS_HOST}
     image: redis:5
@@ -30,6 +44,7 @@ services:
     volumes:
       - redis-data:/data
       - redis-conf:/usr/local/etc/redis/redis.conf
+
   postgres:
     container_name: ${DB_HOST}
     image: postgres:12

@@ -1,5 +1,6 @@
 import { InjectQueue } from '@nestjs/bull';
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Queue } from 'bull'
 import { Connection} from 'typeorm';
 import { CoffeeStatusEntity } from '../coffee-status/coffee-status.entity';
@@ -18,21 +19,25 @@ export class CoffeeService {
     private readonly queue: Queue,
 
     private connection: Connection,
+    private configService: ConfigService,
   ) {}
 
   async addCoffeeToQueue(
-    coffeeData: CreateCoffeeDTO,
+    _coffeeData: CreateCoffeeDTO,
   ) {
-    console.log(coffeeData.time)
+    const coffeeData = { ..._coffeeData };
+    coffeeData.time = coffeeData.time ?
+      coffeeData.time :
+      this.configService.get('createIn');
+
     const recordCoffee = await this.recordCoffee(coffeeData);
     
-    const delay = coffeeData.time || 10 * 60 * 1000;
+    const delay = coffeeData.time;
     const priority = this.toDeterminePriority(coffeeData.user?.role);
-    console.log('priority: ', priority)
     
     return this.queue.add('makeCoffee-job', recordCoffee, {
       timeout: 15 * 60 * 1000,
-      stackTraceLimit: 100,
+      stackTraceLimit: 1000,
       delay,
       priority,
     })
@@ -60,7 +65,7 @@ export class CoffeeService {
 
       return { coffee, status };
     } catch (err) {
-      console.log(err)
+      console.error(err)
       await queryRunner.rollbackTransaction();
       await queryRunner.release();
 

@@ -53,17 +53,20 @@
         </mat-form-field></td></tr>
         <tr><td><mat-form-field class="full-width">
           <input matInput placeholder="Name" type="text" formControlName="name" required>
-          <mat-error *ngIf="this.userFormRegistr.controls.password.hasError('required')">
+          <mat-error *ngIf="this.userFormRegistr.controls.name.hasError('required')">
             Field is required;
           </mat-error>
         </mat-form-field></td></tr>
         <tr><td><mat-form-field class="full-width">
           <mat-label>Roles</mat-label>
           <mat-select name="role" formControlName="role" required>
-            <mat-option *ngFor="let role of userRoles" [value]="role.key">
+            <mat-option *ngFor="let role of userRoles" [value]="role.value">
               {{role.value}}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="this.userFormRegistr.controls.role.hasError('required')">
+            Field is required;
+          </mat-error>
         </mat-form-field></td></tr>
       </table>
     </form>

@@ -3,11 +3,11 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Queue } from 'bull'
 import { Connection} from 'typeorm';
-import { CoffeeStatusEntity } from '../coffee-status/coffee-status.entity';
-import { RolesE } from '../user/interface';
-import { CoffeeEntity } from './coffee.entity';
-import { CreateCoffeeDTO } from './dto/create-coffee.dto';
-import { RecordCoffeeI } from './interface';
+import { CoffeeStatusEntity } from '../../coffee-status/coffee-status.entity';
+import { RolesE } from '../../user/interface';
+import { CoffeeEntity } from '../models/coffee.entity';
+import { CreateCoffeeDTO } from '../dto/create-coffee.dto';
+import { RecordCoffeeI } from '../interface';
 
 @Injectable()
 export class CoffeeService {

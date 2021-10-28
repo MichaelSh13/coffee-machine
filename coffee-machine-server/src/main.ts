@@ -1,5 +1,6 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
+import { WsAdapter } from '@nestjs/platform-ws';
 import { json, urlencoded } from 'body-parser';
 import { AppModule } from './app.module';
 import { RolesGuard } from './modules/auth/guards/roles/roles.guard';
@@ -11,6 +12,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors();
+  app.useWebSocketAdapter(new WsAdapter(app));
   app.use(json({ limit: '50mb' }));
   app.use(urlencoded({ extended: true, limit: '50mb' }));
   app.useGlobalGuards(new RolesGuard(new Reflector()));

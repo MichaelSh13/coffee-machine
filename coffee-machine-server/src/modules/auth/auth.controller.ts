@@ -24,7 +24,6 @@ export class AuthController {
   registerUser(
     @Body() registrationCreateData: RegistrationCreateDTO
   ): Promise<SuccessRegistration> {   
-    console.log('asddsfgsdfg') 
     return this.authService.registerUser(registrationCreateData);
   }
   

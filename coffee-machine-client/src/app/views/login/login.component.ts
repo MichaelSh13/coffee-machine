@@ -64,7 +64,8 @@ export class LoginComponent implements OnInit {
   Registration() {
     if ( this.userFormRegistr.valid ) {
       this.loading = true
-      this.authService.registration(this.userFormLogin.value).subscribe(
+      console.log(this.userFormRegistr.value)
+      this.authService.registration(this.userFormRegistr.value).subscribe(
         () => {
           this.loading = false
           this.setStep(0)

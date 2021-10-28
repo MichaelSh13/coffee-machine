@@ -9,6 +9,8 @@ services:
     environment:
       SHELL: /bin/bash
       NODE_ENV: development
+    expose:
+      - 4444
     volumes:
       - ./coffee-machine-client:/usr/src/app/client
       - /usr/src/app/client/node_modules

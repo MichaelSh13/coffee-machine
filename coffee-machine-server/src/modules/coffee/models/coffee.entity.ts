@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { CoffeeStatusEntity } from "../coffee-status/coffee-status.entity";
-import { UserEntity } from "../user/user.entity";
-import { TypeOfCoffeeE } from "./interface";
+import { CoffeeStatusEntity } from "../../coffee-status/coffee-status.entity";
+import { UserEntity } from "../../user/user.entity";
+import { TypeOfCoffeeE } from "../interface";
 
 @Entity()
 export class CoffeeEntity {

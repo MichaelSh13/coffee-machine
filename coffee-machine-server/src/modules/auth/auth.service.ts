@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import bcryptjs from 'bcryptjs'
+import * as bcryptjs from 'bcryptjs'
 import { RegistrationCreateDTO } from './dto/auth-create-user.dto';
 import { JwtPayloadI, SuccessRegistration } from './interface';
 import { ConfigService } from '@nestjs/config';

@@ -1,8 +1,8 @@
 import { OnQueueActive, OnQueueCleaned, OnQueueCompleted, OnQueueDrained, OnQueueError, OnQueueFailed, OnQueuePaused, OnQueueProgress, OnQueueRemoved, OnQueueResumed, OnQueueStalled, OnQueueWaiting, Process, Processor } from "@nestjs/bull";
 import { Job } from "bull";
-import { CoffeeMachineService } from "../coffee-machine/coffee-machine.service";
-import { CoffeeStatusService } from "../coffee-status/coffee-status.service";
-import { RecordCoffeeI } from "./interface";
+import { CoffeeMachineService } from "../../coffee-machine/coffee-machine.service";
+import { CoffeeStatusService } from "../../coffee-status/coffee-status.service";
+import { RecordCoffeeI } from "../interface";
 
 @Processor('makeCoffee-queue')
 export class MakeCoffeeProcessor {
@@ -41,7 +41,8 @@ export class MakeCoffeeProcessor {
   }
 
   @OnQueueError()
-  onQueueError_1() {
+  onQueueError_1(...e) {
+    console.log(e)
     console.log('OnQueueError')
   }
 

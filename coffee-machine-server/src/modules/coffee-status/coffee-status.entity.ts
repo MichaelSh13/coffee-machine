@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { CoffeeEntity } from "../coffee/coffee.entity";
+import { CoffeeEntity } from "../coffee/models/coffee.entity";
 import { StatusOfCoffeeE } from "../coffee/interface";
 
 @Entity()

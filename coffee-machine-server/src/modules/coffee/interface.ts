@@ -1,5 +1,5 @@
 import { StatusI } from "../coffee-status/interface";
-import { CoffeeEntity } from "./coffee.entity";
+import { CoffeeEntity } from "./models/coffee.entity";
 
 export enum TypeOfCoffeeE {
   REGULAR = 'regular'

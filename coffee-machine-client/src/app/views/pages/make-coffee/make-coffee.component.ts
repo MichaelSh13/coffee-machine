@@ -6,6 +6,7 @@ import { AuthSharedService } from 'src/app/shared/auth.service';
 import { SideBarSharedService } from 'src/app/shared/SideBar.shared.service';
 // import { SideBarSharedService } from 'src/app/shared/SideBar.shared.service';
 import { CoffeeTypeE, CoffeeTypeI, OrderCoffeeFormI, OrderCoffeeI } from './interface';
+// import { WebSocketService } from './web-socket.service';
 
 @Component({
   selector: 'app-make-coffee',
@@ -18,6 +19,7 @@ export class MakeCoffeeComponent implements OnInit {
     private makeCoffeeService: MakeCoffeeService,
     private authSharedService: AuthSharedService,
     private sideBarSharedService: SideBarSharedService,
+    // private webSocketService: WebSocketService,
   ) { }
 
   disabled = false
@@ -45,6 +47,10 @@ export class MakeCoffeeComponent implements OnInit {
       this.authSharedService.getIsAuthenticate().subscribe((auth) => {
         this.setAuthenticated(auth);
       });
+
+    // this.webSocketService.listen('coffee').subscribe((data) => {
+    //   console.log(data)
+    // })
   }
 
 
@@ -75,6 +81,7 @@ export class MakeCoffeeComponent implements OnInit {
       .toPromise()
       .then((data: any) => {
         console.log(data)
+        
         setTimeout(() => {
           this.setDisabledTime(false)
         }, data.delay)
